@@ -1,0 +1,150 @@
+@charset "utf-8";
+/*
+    Theme Name:     Alkamist
+    Theme URI:      https://alkamist.org
+    Author:         Alkamist Inc.
+    Author URI:     alkamist.org/author/exenreco-bell
+    Description:    We have created a theme for you to do absolutly anyting, lets break the the internet!
+
+    Tags: all-round-control, paid-support, subscription-based, blog, portfolio, business, canvas, one-column, two-column, three-column, four-column, ultra-wide, custom-background, custom-menu, custom-controls, custom-widgets, full-witdth, templates, light-wight
+
+    Requires at least: PHP 7.0.0
+
+    Tested up to: PHP 8.0.8
+
+    Requires PHP 8.0.0
+
+    License: GNU General Public License v2 or later
+
+    License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+    Text Domain: alkamist
+
+    This theme, like WordPress, is licensed under the GPL.
+    Use it to make something cool, have fun, and share what you've learned with others.
+
+    Version: 0.0.1 [Beta]
+*/
+
+
+
+
+/*
+===================================================================================
+| Alkamist Theme:: Header settings
+===================================================================================
+*/
+#alkamist-header .current-menu-item a,
+#alkamist-header.default .current-menu-item a
+{
+    border-bottom: 2px solid var(--wp--preset--color--alkamist-tertiary-text);
+}
+
+
+
+
+
+/*
+===================================================================================
+| Alkamist Theme:: Page animations
+===================================================================================
+*/
+body
+{
+    --alkamist-nav-load-time: 200ms;
+}
+
+/* sticky areas */
+.alkamist-sticky
+{
+    position: fixed !important;
+}
+#alkamist-theme-header.alkamist-sticky
+{
+    top: 0 !important;
+    width: 100%;
+    z-index: 99;
+    opacity:0.85;
+}
+#alkamist-post-meta-area.alkamist-sticky
+{
+    width: inherit;
+    z-index: 98;
+}
+
+
+/* Page Animation */
+div.wp-site-blocks
+{
+    animation: body-load 200ms ease-in;
+}
+
+@keyframes body-load
+{
+    0%
+    {
+        transform: translateY(-100%);
+    }
+    100%
+    {
+        transform:translateY(0);
+    }
+}
+
+
+
+/*
+===================================================================================
+| Alkamist Theme:: Gutenberg Customs
+===================================================================================
+*/
+
+
+
+/*
+===================================================================================
+| Alkamist Theme:: Template Parts
+===================================================================================
+*/
+#theme-header,
+.theme_header,
+#theme-header.theme_header
+{ /* Theme Header */
+    position: absolute;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0%;
+    z-index: 99;
+}
+
+#theme-header.sticky,
+.theme_header.sticky,
+#theme-header.theme_header.sticky
+{ /* Theme Header sticky */
+}
+
+#theme-header.wide,
+.theme_header.wide,
+#theme-header.theme_header.wide
+{ /* Theme Header wide */
+}
+
+#theme-header.boxed,
+.theme_header.boxed,
+#theme-header.theme_header.boxed
+{ /* Theme Header boxed */
+}
+
+#theme-header.full-width,
+.theme_header.full-width
+#theme-header.theme_header.full-width
+{ /* Theme Header full-width */
+}
+
+
+
+#theme-media,
+.theme_media,
+#theme-media.theme_media
+{
+}
