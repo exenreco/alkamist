@@ -5,8 +5,8 @@
     "customTemplates":
     [
         {
-            "title": "Boxed (Front Page)",
-            "name": "boxed/front-page",
+            "name": "custom/Blank",
+            "title": "Blank",
             "postTypes":
             [
                 "page",
@@ -14,8 +14,8 @@
             ]
         },
         {
-            "title": "Boxed (Page)",
-            "name": "boxed/page",
+            "name": "custom/Boxed",
+            "title": "Boxed",
             "postTypes":
             [
                 "page",
@@ -23,44 +23,8 @@
             ]
         },
         {
-            "title": "Full Width (Front Page)",
-            "name": "full-width/front-page",
-            "postTypes":
-            [
-                "page",
-                "post"
-            ]
-        },
-        {
-            "title": "Full Width (Page)",
-            "name": "full-width/page",
-            "postTypes":
-            [
-                "page",
-                "post"
-            ]
-        },
-        {
-            "title": "Wide (Front Page)",
-            "name": "wide/front-page",
-            "postTypes":
-            [
-                "page",
-                "post"
-            ]
-        },
-        {
-            "title": "Wide (Page)",
-            "name": "wide/page",
-            "postTypes":
-            [
-                "page",
-                "post"
-            ]
-        },
-        {
-            "title": "Blank Template",
-            "name": "blank",
+            "name": "custom/Full-width",
+            "title": "Full width",
             "postTypes":
             [
                 "page",
