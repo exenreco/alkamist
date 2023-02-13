@@ -84,8 +84,10 @@
             "wideSize":     "2560px",
             "contentSize":  "1920px"
         },
-        "appearanceTools":                  true,
-        "useRootPaddingAwareAlignments":    true,
+        "shadow":
+        {
+
+        },
         "typography":
         {
             "fontFamilies":
@@ -422,16 +424,6 @@
                 }
             ]
         },
-        "border":
-        {
-            "color":    true,
-            "style":    true,
-            "width":    true,
-            "radius":   true
-        },
-        "blocks":
-        {
-        },
         "custom":
         {
             "pixelSizes":
@@ -473,7 +465,19 @@
                 "bolder": "800",
                 "black": "900"
             }
-        }
+        },
+        "border":
+        {
+            "color":    true,
+            "style":    true,
+            "width":    true,
+            "radius":   true
+        },
+        "blocks":
+        {
+        },
+        "appearanceTools": true,
+        "useRootPaddingAwareAlignments": true
     },
     "styles":
     {
@@ -954,7 +958,7 @@
                             "textDecoration": "none"
                         },
                         ":hover":
-                        { 
+                        {
                             "typography": { "textDecoration": "none" }
                         }
                     }
