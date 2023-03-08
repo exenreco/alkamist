@@ -84,98 +84,6 @@
     // ADD TO EXTRACT AFTER EXPERIMENTAL
     NumberControl = __experimentalNumberControl,
 
-    /**
-     * BLOCK ARRAY TO BLOCK
-     * 
-     * Converts an array of wp template to a wordpress block.
-     * 
-     * @param {array} template An array of wordpress blocks in array format.
-     * 
-     * {
-     * 
-     *  That is a wp InnerBlock template to a block object,
-     * 
-     *  for example: 
-     * 
-     *  - [ ['core/paragraph', {}] ] - which converts to a wp paragraph block 
-     * 
-     *  - [ ['core/group', {}, ['core/paragraph', {}] ] ] - which converts 
-     *  to a wp group with a paragraph block.
-     * 
-     * }
-     * 
-     * @return {object|null} A react elemet of the created block or null.
-     */
-    block_array_to_block = function( template = [] )
-    {
-        if( typeof(template) !== 'object' ) { return null; }
-
-        var atts,  elements = [], children, blockName;
-
-        template.forEach((block, index) =>
-        {
-            blockName   = block[0];
-            atts        = block[1];
-            children    = block[2];
-
-            if( blockName && typeof(blockName) === "string" 
-            && atts && typeof(atts) === 'object' )
-            {
-                elements.push((() => (children && typeof(children) === 'object')
-                ?
-                    createBlock(
-                        blockName,
-                        ...atts,
-                        block_array_to_block(children)
-                    )
-                :
-                    createBlock(
-                        blockName,
-                        ...atts,
-                        null
-                    )
-                )())
-            }
-        });
-
-        return elements;
-    },
-
-    block_array_to_template = function( template = [] )
-    {
-        if( typeof(template) !== 'object' ) { return null; }
-
-        var atts,  elements = [], children, blockName;
-
-        template.forEach((block, index) =>
-        {
-            blockName   = block[0];
-            atts        = block[1];
-            children    = block[2];
-
-            if( blockName && typeof(blockName) === "string" 
-            && atts && typeof(atts) === 'object' )
-            {
-                elements.push((() => (children && typeof(children) === 'object')
-                ?
-                    [
-                        blockName,
-                        {...atts},
-                        block_array_to_template(children)
-                    ]
-                :
-                    [
-                        blockName,
-                        {...atts},
-                        null
-                    ]
-                )())
-            }
-        });
-
-        return elements;
-    },
-
     PRESET_TEMPLATES = 
     [
         {
@@ -206,184 +114,6 @@
         { value: '|', label: '|', title:'verbar', help: 'adds a pipe between dates' },
         { value: 'to', label: 'to', title:'to', help: 'adds a "to" between dates' }
     ],
-
-    /**
-     * PRESET MAP
-     * 
-     * An array of copyright presets that allows the
-     * user to generate a predefined block.
-     * 
-     * @return {map} A javascript map object containing a list of presets.
-     */
-    PresetsMap = (() =>
-    {
-        const
-        map = new Map();
-
-        map.set('simple',
-        {
-            title: 'Simple',
-            label: 'a template that ouly returns the copyright text.',
-            template:
-            [
-                {
-                    name: 'core/group',
-                    atts:
-                    {
-                        lock:   { move: true, remove: true },
-                        tagName:        'div',
-                        className:      'alkamist copyright-group',
-                        layout: { type: "flex", orientation: "vertical", justifyContent: "center" }
-                    },
-                    children:
-                    [
-                        {
-                            name: 'core/site-title',
-                            atts:
-                            {
-                                tagName:        'h6',
-                                className:      'alkamist copyright-owner',
-                                placeholder:    "Site Title",
-                                content:        "Site Title"
-                            },
-                            children: null
-                        }
-                    ]
-                }
-            ]
-        });
-
-        map.set('mesmorized', 
-        {
-            title: 'Mesmorized',
-            label: 'a template that replicates the higlight wp theme.',
-            template:
-            [
-                {
-                    name: 'core/group',
-                    atts:
-                    {
-                        lock:   { move: true, remove: true },
-                        tagName:        'div',
-                        className:      'alkamist copyright-group',
-                        layout: { type: "flex", orientation: "vertical", justifyContent: "center" }
-                    },
-                    children:
-                    [
-                        {
-                            name: 'core/site-logo',
-                            atts:
-                            {
-                                tagName:    'img',
-                                className:  "alkamist copyright-image is-style-rounded"
-                            },
-                            children: null
-                        },
-                        {
-                            name: 'core/social-links',
-                            atts:
-                            {
-                                tagName:    'ul',
-                                className:  'alkamist copyright-group',
-                                align:      'center',
-                            },
-                            children:
-                            [
-                                {
-                                    name: 'core/social-link',
-                                    atts:
-                                    {
-                                        url:        '#',
-                                        align:      'center',
-                                        service:    'linkedin',
-                                        tagName:    'li',
-                                        className:  'alkamist copyright-social-item',
-                                    },
-                                    children: null
-                                },
-                                {
-                                    name: 'core/social-link',
-                                    atts:
-                                    {
-                                        url:        '#',
-                                        align:      'center',
-                                        service:    'facebook',
-                                        tagName:    'li',
-                                        className:  'alkamist copyright-social-item',
-                                    },
-                                    children: null
-                                },
-                                {
-                                    name: 'core/social-link',
-                                    atts:
-                                    {
-                                        url:        '#',
-                                        align:      'center',
-                                        service:    'instagram',
-                                        tagName:    'li',
-                                        className:  'alkamist copyright-social-item',
-                                    },
-                                    children: null
-                                },
-                                {
-                                    name: 'core/social-link',
-                                    atts:
-                                    {
-                                        url:        '#',
-                                        align:      'center',
-                                        service:    'twitter',
-                                        tagName:    'li',
-                                        className:  'alkamist copyright-social-item',
-                                    },
-                                    children: null
-                                },
-                            ]
-                        }
-                    ]
-                }
-            ]
-        });
-
-        map.set('custom', 
-        {
-            title: 'Custom Blocks',
-            label: 'allows custom blocks',
-            template:
-            [
-                {
-                    name: 'core/group',
-                    atts:
-                    {
-                        lock:       { move: true, remove: true },
-                        tagName:    'div',
-                        className:  'alkamist copyright-group',
-                        layout:     { type: "flex", orientation: "vertical", justifyContent: "center" }
-                    },
-                    children:
-                    [
-                        {
-                            name: 'core/paragraph',
-                            atts:
-                            {
-                                tagName:    'p',
-                                className:  'alkamist copyright-text',
-                                align:      'center', placeholder: 'additionl content...'
-                            },
-                            children: null
-                        }
-                    ]
-                }
-            ]
-        });
-
-        return map;
-    })(),
-
-
-    locations_map = (() => 
-    {
-    })(),
-
 
     /**
      * INSRTER CONTENTS && SETTINGS
@@ -439,7 +169,7 @@
      * 
      * @return {array} the block's blockeditor controls.
      */
-    sidebar = function ( attributes, setAttributes, innerBlocks )
+    sidebar = function ( attributes, setAttributes )
     {
         const
         /**
@@ -683,7 +413,7 @@
                     copyright_rights()
                 );
 
-                return ( date_group() );
+                return date_group();
             },
 
             /**
@@ -1037,11 +767,12 @@
              * the parent copyright block element.
              */
             copyright_parent_block = () => createElement(
-                'section',
+                'div',
                 {},
                 createElement(
                     InnerBlocks,
-                    {}
+                    {
+                    }
                 ),
                 createElement(
                     'p',
@@ -1260,7 +991,7 @@
          * @since WP API version 2
          */
         copyright_parent_block = () => createElement(
-            'section',
+            'div',
             {},
             createElement(
                 InnerBlocks.Content,
