@@ -1,0 +1,14 @@
+{
+    "$schema":          "https://schemas.wp.org/trunk/block.json",
+    "apiVersion":       2,
+    "icon":             "star",
+    "name":             "alkamist/copyright",
+    "title":            "Copyright Notice",
+    "description":      "Dis",
+    "textdomain":       "alkamist",
+    "version":          "1.0.0",
+    "category":         "common",
+    "keywords":         ["alkamist", "copyright", "notice", "copyright notice"],
+    "supports":         {},
+    "script":           ["file:./assets/js/editor_handles.js"]
+}

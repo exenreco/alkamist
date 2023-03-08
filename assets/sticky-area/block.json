@@ -1,0 +1,60 @@
+{
+    "$schema":      "https://schemas.wp.org/trunk/block.json",
+    "apiVersion":   2,
+    "version":      "1.0.0",
+    "name":         "alkamist/sticky-area",
+    "title":        "Sticky area",
+    "category":     "text",
+    "parent":       [ "core/group" ],
+    "icon":         "star",
+    "description":  "Shows warning, error or success notices...",
+    "keywords":     [ "alert", "message" ],
+    "textdomain":   "alkamist",
+    "attributes":
+    {
+        "message":
+        {
+            "type": "string",
+            "source": "html",
+            "selector": ".message"
+        }
+    },
+    "providesContext":
+    {
+        "my-plugin/message": "message"
+    },
+    "supports":
+    {
+        "align": true
+    },
+    "styles":
+    [
+        { "name": "default", "label": "Default", "isDefault": true },
+        { "name": "other", "label": "Other" }
+    ],
+    "example":
+    {
+        "attributes":
+        {
+            "message": "This is a notice!"
+        }
+    },
+    "variations":
+    [
+        {
+            "name": "example",
+            "title": "Example",
+            "attributes":
+            {
+                "message": "This is an example!"
+            }
+        }
+    ],
+    "usesContext": [ "groupId" ],
+    "editorScript": "file:./assets/js/editor_handles.js",
+    "script": "file:./assets/js/script_handles.js",
+    "viewScript": [ "file:./assets/js/view_handles.js" ],
+    "editorStyle": "file:./assets/css/editor_handles.css",
+    "style": [ "file:./assets/css/style_handles.css" ],
+    "render": "file:./render.php"
+}

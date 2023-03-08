@@ -1,0 +1,77 @@
+.alkamist-copyright-interface .alkamiist_radio_grid input
+{
+    display: block;
+    position: absolute;
+    width: inherit;
+    max-width: 32px;
+    min-width: 32px;
+    height: 32px;
+    max-height: 32px;
+    min-height: 32px;
+    border-radius: 5px;
+    margin: auto;
+    opacity: 0.25;
+    z-index: 1;
+    /* opacity: 0;*/
+}
+.alkamist-copyright-interface .alkamiist_radio_grid input:checked
+{
+    opacity: 1;
+}
+
+.alkamist-copyright-interface .alkamiist_radio_grid input:checked:before
+{
+    display: none !important;
+}
+
+.alkamist-copyright-interface .alkamiist_radio_grid input:checked + label
+{
+    color: #fff;
+}
+
+.alkamist-copyright-interface .alkamiist_radio_grid .components-base-control__field > div
+{
+    position: relative;
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+}
+.alkamist-copyright-interface .alkamiist_radio_grid .components-base-control__field > div .components-radio-control__option
+{
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    max-width: 32px;
+    min-width: 32px;
+    height: 32px;
+    max-height: 32px;
+    min-height: 32px;
+    margin: 5px;
+    border-radius: 5px;
+    background: rgba(0,0,0,0.05);
+}
+.alkamist-copyright-interface .alkamiist_radio_grid .components-base-control__field > div .components-radio-control__option label
+{
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-weight: bolder;
+    font-size: 1.425rem;
+    z-index: 2;
+}
+.alkamist-copyright-interface .alkamiist_radio_grid .components-base-control__field > div .components-radio-control__option:hover
+{
+    color: #fff;
+    background: #007cba;
+    cursor: pointer;
+}
