@@ -89,7 +89,12 @@
         {
             help: '',
             label: '',
-            value: [ ['core/group', {}, [ ['core/site-title',{}] ]] ],
+            value: JSON.stringify( [ [ 'core/group', {}, [ ['core/site-logo',{}] ] ] ] ),
+        },
+        {
+            help: '',
+            label: '',
+            value: JSON.stringify([ ['core/group', {}, [ ['core/site-title',{}] ]] ]),
         },
     ],
 
@@ -169,7 +174,7 @@
      * 
      * @return {array} the block's blockeditor controls.
      */
-    sidebar = function ( attributes, setAttributes )
+    sidebar = function ( attributes, setAttributes, blockProps )
     {
         const
         /**
@@ -197,12 +202,14 @@
              */
             preset_controls = () =>
             {
-                /*const
+                const
                 template_input = () => createElement(
                     RadioControl,
                     {
                         help:       'The symbol used to indicate the type of copyright.',
                         label:      'Copyright symbol',
+                        selected:   attributes.template ? attributes.template : PRESET_TEMPLATES[0].value,    
+                        onChange:   (selected) => setAttributes({...attributes, template: selected}),
                         options:    (() =>
                         {
                             const
@@ -210,20 +217,7 @@
                             options = [];
                             // map date format options
                             PRESET_TEMPLATES.map(
-                                (option, index) => 
-                                {
-                                    const
-                                    s = serialize( option.value );
-
-                                    options.push({
-                                        label: createElement(
-                                            'div',
-                                            {
-                                            },
-                                            s
-                                        )
-                                    });
-                                }
+                                (option, index) => options.push(option)
                             );
 
                             // return date format options
@@ -243,7 +237,7 @@
                         createElement('hr')
                     ),
                     template_input()
-                );*/
+                );
             },
 
             copyright_controls = () =>
@@ -767,16 +761,20 @@
              * the parent copyright block element.
              */
             copyright_parent_block = () => createElement(
-                'div',
-                {},
+                'section',
+                {
+                    ...blockProps
+                },
                 createElement(
                     InnerBlocks,
                     {
+                        template: JSON.parse(attributes.template) ? JSON.parse(attributes.template) : []
                     }
                 ),
                 createElement(
                     'p',
                     {
+                        ...attributes
                     },
                     (() => [
                         // copyright symbol
@@ -898,7 +896,7 @@
          * 
          * @since WP API version 2
          */
-        //blockProps = useBlockProps(),
+        blockProps = useBlockProps(),
         
         /**
          * Initialize block editor inserter options
@@ -916,9 +914,7 @@
          * 
          * @since WP API version 2
          */
-        block_sidebar = sidebar( attributes, setAttributes, innerBlocks ),
-
-        blockProps = useBlockProps();
+        block_sidebar = sidebar( attributes, setAttributes, blockProps );
 
 
         /**
@@ -991,16 +987,18 @@
          * @since WP API version 2
          */
         copyright_parent_block = () => createElement(
-            'div',
-            {},
+            'section',
+            {
+                ...blockProps
+            },
             createElement(
                 InnerBlocks.Content,
-                {
-                }
+                {}
             ),
             createElement(
                 'p',
                 {
+                    ...attributes
                 },
                 (() => [
                     // copyright symbol
@@ -1090,15 +1088,16 @@
             {
                 text:                   true,
                 link:                   true,
+                hover:                  true,
                 background:             true,
                 gradients:              true,
                 __experimentalDuotone:  '> .overlay'
             },
             spacing:
             {
-                margin:     true,    // Enable margin UI control.
-                padding:    true,    // Enable padding UI control.
-                blockGap:   [ 'horizontal', 'vertical' ],                   // Enables block spacing UI control.
+                margin:     ['top', 'left', 'right', 'bottom'], // Enable margin UI control.
+                padding:    ['top', 'left', 'right', 'bottom'], // Enable padding UI control.
+                blockGap:   [ 'horizontal', 'vertical' ],       // Enables block spacing UI control.
             },
             position:
             {
@@ -1113,81 +1112,46 @@
                 fontSize:   true,   // Enable support and UI control for font-size.
                 lineHeight: true,   // Enable support and UI control for line-height.
             },
+            defaultStylePicker: true,
+            customClassName: true,
         },
         attributes:
         {
             align:
             {
                 type: 'string',
-                default: 'center'
+                default: 'left'
             },
-            layout:
-            {
-                type: 'flex',
-                orientation: "horizotal",
-                justifyContent: 'center'
-            },
-            spacing:
-            {
-                margin:
-                {
-                    top: 0,
-                    lef: 0,
-                    right: 0,
-                    bottom: 0,
-                },
-                padding:
-                {
-                    top: 0,
-                    lef: 0,
-                    right: 0,
-                    bottom: 0,
-                },
-                blockGap:
-                {
-                    vertical: 0,
-                    horizontal: 0
-                }
-            },
-            elements:
-            {
-                link:
-                {
-                    color:
-                    {
-                        text: 'red'
-                    },
-                    ':hover':
-                    {
-                        text: 'red'
-                    },
-                    typography:
-                    {
-                        fontSize: 'inherit',
-                        lineHeight: '1.5'
-                    },
-                },
-            },
-            demesions:
-            {
-                minHeight: '30px'
-            },
-            typography:
-            {
-                fontSize: 'inherit',
-                lineHeight: 'auto'
-            },
-            
+
+            /**
+             * PREDEFINED COPYRIGHT COLORS
+             * 
+             * Predefined copyright fallback colors
+             */
             colors:
             {
                 type: 'array',
                 default:
                 [
-                    { name:"", color: "", },
+                    { name:"cornflower", color: "cornflowerBlue", },
                     { name:"", color: "", },
                     { name:"", color: "", },
                     { name:"", color: "", }
                 ]
+            },
+            
+            layout:
+            {
+                type: 'object',
+                default:
+                {
+                    type: 'flex',
+                    display: 'flex',
+                    flex: '1 1 auto',
+                    orientation: "horizotal",
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }
             },
             style:
             {
@@ -1196,26 +1160,29 @@
                 {
                     color:
                     {
-                        type: 'object',
-                        default:
+                        text: 'inherit',
+                        duotone: [],
+                        gradient: '',
+                        backgroundColor: '',
+                    },
+                    elements:
+                    {
+                        link:
                         {
-                            text: 'inherit',
-                            duotone: ['red', 'green'],
-                            gradient: '',
-                            background: '',
-                            backgroundColor: '',
+                            color:
+                            {
+                                text: 'inherit'
+                            },
                         }
                     },
-                    position:
-                    {
-                        type: 'object',
-                        default:
-                        {
-                            top: '0px',
-                            tpye: 'sticky'
-                        }
-                    }
-                }
+                    margin:     '0px',
+                    padding:    '5px',
+                    blockGap:   '0px',
+                    fontSize:   'inherit',
+                    position:   { top: '0px', tpye: 'sticky' },
+                    demesions:  { minHeight: 'auto' },
+                    lineHeight: '1.5',
+                },
             },
             dateFormat:
             {
@@ -1251,6 +1218,11 @@
             {
                 type: 'string',
                 default: 'All rights reserved.'
+            },
+            template:
+            {
+                type: 'string',
+                default: PRESET_TEMPLATES[0].value
             }
         }
     });
